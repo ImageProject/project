@@ -214,5 +214,5 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
-# ignore libs (dont sync)
-libs/
+# ignore libraries (dont sync)
+libraries/
