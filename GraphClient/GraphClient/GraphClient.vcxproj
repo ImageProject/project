@@ -10,6 +10,21 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Line.h" />
+    <ClInclude Include="MiniMap.h" />
+    <ClInclude Include="SmallVertex.h" />
+    <ClInclude Include="Vertex.h" />
+    <ClInclude Include="VertexController.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Line.cpp" />
+    <ClCompile Include="MiniMap.cpp" />
+    <ClCompile Include="SmallVertex.cpp" />
+    <ClCompile Include="TutorialApp.cpp" />
+    <ClCompile Include="Vertex.cpp" />
+    <ClCompile Include="VertexController.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E475FCCB-5B4C-40E1-88BB-569507B850D6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -81,21 +96,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\Line.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\MiniMap.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\SmallVertex.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\TutorialApp.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\Vertex.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\VertexController.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\Line.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\MiniMap.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\SmallVertex.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\Vertex.h" />
-    <ClInclude Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\VertexController.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
