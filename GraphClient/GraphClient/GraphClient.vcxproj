@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9474CC1B-C112-4BAA-8BB3-8C6C1FF35A91}</ProjectGuid>
+    <ProjectGuid>{E475FCCB-5B4C-40E1-88BB-569507B850D6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ConsoleApplication1</RootNamespace>
+    <RootNamespace>GraphClient</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -41,6 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Users\сергей\Desktop\cinder_0.8.5_vc2012\cinder\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -51,14 +52,16 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\libraries\Cinder\include;$(SolutionDir)\libraries\Boost\include;$(SolutionDir)\libraries\ZeroMQ\include;$(SolutionDir)\libraries\opencv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\project\project\libraries\Boost\include;D:\project\project\libraries\Cinder\include;D:\project\project\libraries\ZeroMQ\include;D:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\libraries\Cinder\lib;$(SolutionDir)\libraries\Boost\lib;$(SolutionDir)\libraries\ZeroMQ\lib;$(SolutionDir)\libraries\opencv\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>cinder_d.lib;libzmq_d.lib;libzmq.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\project\project\libraries\Boost\lib;D:\project\project\libraries\Cinder\lib;D:\project\project\libraries\ZeroMQ\lib;D:\opencv\build\lib;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cinder_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -69,20 +72,29 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\libraries\Cinder\include;$(SolutionDir)\libraries\Boost\include;$(SolutionDir)\libraries\ZeroMQ\include;$(SolutionDir)\libraries\opencv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)\libraries\Cinder\lib;$(SolutionDir)\libraries\opencv\lib;$(SolutionDir)\libraries\Boost\lib;$(SolutionDir)\libraries\ZeroMQ\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>cinder_d.lib;libzmq_d.lib;libzmq.lib;opencv_calib3d248d.lib;opencv_contrib248d.lib;opencv_core248d.lib;opencv_features2d248d.lib;opencv_flann248d.lib;opencv_gpu248d.lib;opencv_highgui248d.lib;opencv_imgproc248d.lib;opencv_legacy248d.lib;opencv_ml248d.lib;opencv_nonfree248d.lib;opencv_objdetect248d.lib;opencv_ocl248d.lib;opencv_photo248d.lib;opencv_stitching248d.lib;opencv_superres248d.lib;opencv_ts248d.lib;opencv_video248d.lib;opencv_videostab248d.lib﻿;opencv_calib3d248.lib;opencv_contrib248.lib;opencv_core248.lib;opencv_features2d248.lib;opencv_flann248.lib;opencv_gpu248.lib;opencv_highgui248.lib;opencv_imgproc248.lib;opencv_legacy248.lib;opencv_ml248.lib;opencv_nonfree248.lib;opencv_objdetect248.lib;opencv_ocl248.lib;opencv_photo248.lib;opencv_stitching248.lib;opencv_superres248.lib;opencv_ts248.lib;opencv_video248.lib;opencv_videostab248.lib﻿;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\Line.cpp" />
+    <ClCompile Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\MiniMap.cpp" />
+    <ClCompile Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\SmallVertex.cpp" />
+    <ClCompile Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\TutorialApp.cpp" />
+    <ClCompile Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\Vertex.cpp" />
+    <ClCompile Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\VertexController.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\Line.h" />
+    <ClInclude Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\MiniMap.h" />
+    <ClInclude Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\SmallVertex.h" />
+    <ClInclude Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\Vertex.h" />
+    <ClInclude Include="..\..\..\..\..\Desktop\project\ConsoleApplication5\ConsoleApplication5\VertexController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
