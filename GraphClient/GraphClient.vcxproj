@@ -11,14 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Line.h" />
+    <ClInclude Include="vLine.h" />
     <ClInclude Include="MiniMap.h" />
     <ClInclude Include="SmallVertex.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="VertexController.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Line.cpp" />
+    <ClCompile Include="vLine.cpp" />
     <ClCompile Include="MiniMap.cpp" />
     <ClCompile Include="SmallVertex.cpp" />
     <ClCompile Include="TutorialApp.cpp" />
