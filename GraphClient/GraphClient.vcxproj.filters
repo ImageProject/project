@@ -30,6 +30,18 @@
     <ClInclude Include="vLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resources2.h">
+      <Filter>Source Files\Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Output.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Welcome.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="VertexController.cpp">
@@ -50,5 +62,13 @@
     <ClCompile Include="vLine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Welcome.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources2.rc">
+      <Filter>Source Files\Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

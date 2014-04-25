@@ -6,6 +6,10 @@
 #include "cinder/Text.h"
 #include <vector>
 #include "smallVertex.h"
+#include "cinder/gl/gl.h"
+#include "cinder/gl/Texture.h"
+#include "boost\filesystem.hpp"
+#include "Output.h"
 class Vertex {
  public:
 int speed;
@@ -18,6 +22,17 @@ ci::Vec2i	vLoc;
 int		vRadius;
 ci::Vec2i vBounds[4];
 ci::Color	vColor;
+typeVertex type;
+boost::filesystem::path path;
+boost::filesystem::path file_name;
+ci::gl::Texture image;
+typeFilter filter;
+ci::gl::Texture reImage;
+bool isImage;
+bool isMini;
+short id;
+
+
 //std::vector<int> vEdges;
 //std::string Name;
 std::vector<smallVertex> smallVertexs;

@@ -46,12 +46,12 @@ Vec4i VertexController::isConnect(const Vec2i & location){
 		}
 	return Vec4i(0,0,0,0);
 	};
-bool VertexController::isTextBox(const Vec2i & location){
+size_t VertexController::isTextBox(const Vec2i & location){
 	for (vector<Vertex>::iterator p=Vertexes.begin(); p!=Vertexes.end();++p){
 			short current_y =  location.y-p->vLoc.y;
 			short current_x =  location.x-p->vLoc.x;
-			if ((p->vRadius<current_x)&&(p->vRadius>current_x)&&(p->vRadius<current_y)&&(p->vRadius>current_y))
-				return true;
+			if ((-p->vRadius<current_x)&&(p->vRadius>current_x)&&(-p->vRadius<current_y)&&(p->vRadius>current_y))
+				return p-Vertexes.begin();
 	}
 	return false;
 	};

@@ -5,6 +5,7 @@
 #include "cinder\gl\gl.h"
 #include "MiniMap.h"
 #include "vLine.h"
+
 using namespace ci;
 class VertexController{
 public:
@@ -16,11 +17,11 @@ public:
 	std::vector<Vec4i> connects;
 	std::vector<vLine> lines;
 	int direction;
-	bool isTextBox(const Vec2i&);
+	size_t isTextBox(const Vec2i&);
 
 std::vector<Vertex> Vertexes;
 int updateSpeed;
-MiniMap  mMiniMap;        //warning,crutch!
+MiniMap  mMiniMap;     //warning,crutch!
 ;
 };
 #endif

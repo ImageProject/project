@@ -9,6 +9,7 @@ MiniMap::MiniMap(){
 void MiniMap::push_vertex(const Vertex & Image){
 	Vertex MapObject = Vertex(center+(Image.vLoc - resolution/2)/scale, Image.vRadius,scale);
 	MapObject.vColor=Image.vColor;
+	MapObject.isMini = true;
 	objects.push_back(MapObject);
 }
 void MiniMap::push_line(const vLine & Image){

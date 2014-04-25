@@ -22,18 +22,18 @@ void smallVertex::draw(){
 	gl::drawSolidCircle(smLoc,smRadius);
 };
 void smallVertex::update(const int & speed, const int & direction){
-		switch(direction){
-	case 1: 
-		
+enum {up=1,down,left,right};
+	switch(direction){
+	case up: 
 	smLoc.y=smLoc.y-speed;
 	break;
-	case 2: 
+	case down: 
     smLoc.y=smLoc.y+speed;
     break;
-	case 3: 
+	case left: 
     smLoc.x=smLoc.x-speed;
 	break;
-	case 4:
+	case right:
 	smLoc.x=smLoc.x+speed;
 	break;
 	};

@@ -5,17 +5,29 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Output.h" />
+    <ClInclude Include="OutputController.h" />
+    <ClInclude Include="resources2.h" />
     <ClInclude Include="vLine.h" />
     <ClInclude Include="MiniMap.h" />
     <ClInclude Include="SmallVertex.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="VertexController.h" />
+    <ClInclude Include="Welcome.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vLine.cpp" />
@@ -24,6 +36,10 @@
     <ClCompile Include="TutorialApp.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="VertexController.cpp" />
+    <ClCompile Include="Welcome.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources2.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E475FCCB-5B4C-40E1-88BB-569507B850D6}</ProjectGuid>
@@ -44,6 +60,12 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
@@ -56,10 +78,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\libraries\Cinder\include;$(SolutionDir)\libraries\MongoDB\include;$(SolutionDir)\libraries\ZeroMQ\include;$(SolutionDir)\libraries\Boost\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\libraries\Protobuf\include;$(SolutionDir)\libraries\Cinder\include;$(SolutionDir)\libraries\MongoDB\include;$(SolutionDir)\libraries\ZeroMQ\include;$(SolutionDir)\libraries\Boost\include;$(SolutionDir)\libraries\OpenCV\opencv\build\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ExecutablePath>$(SolutionDir)\libraries\Cinder\include;$(SolutionDir)\libraries\MongoDB\include;$(SolutionDir)\libraries\ZeroMQ\include;$(SolutionDir)\libraries\Boost\include;$(IncludePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -68,14 +93,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\libraries\Cinder\include;$(SolutionDir)\libraries\MongoDB\include;$(SolutionDir)\libraries\ZeroMQ\include;$(SolutionDir)\libraries\Boost\include;$(IncludePath)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\libraries\Cinder\include;$(SolutionDir)\libraries\MongoDB\include;$(SolutionDir)\libraries\ZeroMQ\include;$(SolutionDir)\libraries\Boost\include;$(IncludePath);$(SolutionDir)\libraries\OpenCV\opencv\build\include\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\libraries\Cinder\lib;$(SolutionDir)\libraries\MongoDB\lib;$(SolutionDir)\libraries\ZeroMQ\lib;$(SolutionDir)\libraries\Boost\lib;$(IncludePath)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>cinder_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\libraries\Cinder\lib;$(SolutionDir)\libraries\MongoDB\lib;$(SolutionDir)\libraries\ZeroMQ\lib;$(SolutionDir)\libraries\Boost\lib;$(IncludePath);$(SolutionDir)\libraries\OpenCV\opencv\build\x64\vc11\lib;$(SolutionDir)\libraries\Protobuf\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cinder_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opencv_calib3d245d.lib;opencv_contrib245d.lib;opencv_core245d.lib;opencv_features2d245d.lib;opencv_flann245d.lib;opencv_gpu245d.lib;opencv_highgui245d.lib;opencv_imgproc245d.lib;opencv_legacy245d.lib;opencv_ml245d.lib;opencv_nonfree245d.lib;opencv_objdetect245d.lib;opencv_photo245d.lib;opencv_stitching245d.lib;opencv_superres245d.lib;opencv_ts245d.lib;opencv_video245d.lib;opencv_videostab245d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
@@ -94,6 +119,15 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)\libraries\Cinder\include;$(SolutionDir)\libraries\MongoDB\include;$(SolutionDir)\libraries\ZeroMQ\include;$(SolutionDir)\libraries\Boost\include;$(IncludePath)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)\libraries\Cinder\lib;$(SolutionDir)\libraries\MongoDB\lib;$(SolutionDir)\libraries\ZeroMQ\lib;$(SolutionDir)\libraries\Boost\lib;$(IncludePath)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cinder_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opencv_core231d.lib;opencv_imgproc231d.lib;opencv_highgui231d.lib;opencv_ml231d.lib;opencv_video231d.lib;opencv_features2d231d.lib;opencv_calib3d231d.lib;opencv_objdetect231d.lib;opencv_contrib231d.lib;opencv_legacy231d.lib;opencv_flann231d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
