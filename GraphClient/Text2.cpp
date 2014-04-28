@@ -15,12 +15,12 @@ void Text::fill(const key &k_event){
 			if (cur_text.size()) cur_text.erase(/**/);
 			break;
 		case key::KEY_RIGHT:
-		    // 
+			// 
 			break;
 		case key::KEY_LEFT:
 			//
 			break;
-	    default:
+		default:
 			warning =true;
 			break;
 	};

@@ -14,11 +14,13 @@
 #include "cinder/ImageIo.h"
 #include "Output.h"
 #include "OutputController.h"
+#include "Welcome.h"
 #pragma comment(lib, "opencv_highgui245d.lib")
 using namespace ci;
 using namespace ci::app;
+bool next = false;
+
 class TutorialApp: public AppBasic{
-	bool updates;
 	void setup();
 	void update();
 	void draw();
@@ -29,6 +31,9 @@ class TutorialApp: public AppBasic{
 	short downs;
 	bool stop;
 	int changeVertex;
+	Welcome mWelcome;
+	int change;
+	bool updates;
 	VertexController mVertexController;
 	OutputController mOutputController;
 };
@@ -44,23 +49,43 @@ void TutorialApp::setup(){
 	gl::lineWidth(2.5f);
 	stop = false;
 	changeVertex = false;
-
+change = 0;
+Vec2i locate_pass = Vec2i(960,540);
+Vec2i locate_login = Vec2i(960,450);
+Vec2i locate_hi = Vec2i(960,100);
+Vec2i locate_newUser = Vec2i(100,900);
+Vec2i locate_end_and_logIn = Vec2i(1600, 900);
+std::string new_user = "New User";
+std::string hi = "Hi! Chose registration or log in!)";
+std::string log_in = "LogIn";
+mWelcome.Setup(locate_login, locate_pass,locate_hi,locate_newUser,locate_end_and_logIn,new_user, hi,log_in);
+mWelcome.set_sizes();
+mWelcome.button= gl::Texture(loadImage("button.jpg"));
+//mWelcome.setLocPass(Vec2i(1920-50,1080 -50));
+//mWelcome.setLogPass(Vec2i(1920-50,1080 +50));
 	
 };
 
 void TutorialApp::update(){
+	if (next){
 	if (updates){
 		mVertexController.update(mVertexController.updateSpeed,mVertexController.direction);
 	updates = false;}
-
+	}
+	else 
+	mWelcome.update();
 };
 void TutorialApp::draw(){
+	if (next) {
 	gl::clear(Color(242,221,198));
     mVertexController.draw();
-
-
+	} else {
+	gl::clear(Color(242,221,198));
+	mWelcome.draw();
+	}
 }
 void TutorialApp::keyDown(KeyEvent k_event){
+	if (next) {
 	enum direction{up=1,down,left,right};
 	switch(k_event.getCode()){
 		if(!stop){
@@ -149,6 +174,17 @@ void TutorialApp::keyDown(KeyEvent k_event){
 		} else {// тут будет пересылка отправка 
 		}
 	}         /// тут надо исправить неболльшой баг, ибо отправл€тьс€ все будет только после нажати€ левых кнопок. Ќу и лан
+	}
+	else {
+		enum changes{login=1,password,newUser,endAndLogIn};
+		switch(change){
+		case login:
+		case password:
+			mWelcome.fill(k_event,change);
+		    break;
+		}
+	}
+
 }
 void TutorialApp::fileDrop(FileDropEvent drop){
 	for(size_t i=0; i<drop.getNumFiles();++i){
@@ -172,7 +208,8 @@ void TutorialApp::fileDrop(FileDropEvent drop){
 
 
 void TutorialApp::mouseDown(MouseEvent m_event){
-	if (m_event.isLeftDown())
+	if (next)  {
+		if (m_event.isLeftDown())
 	{         //warning,crutch!
 		mVertexController.addVertexes(m_event.getPos());
 	}
@@ -204,8 +241,29 @@ void TutorialApp::mouseDown(MouseEvent m_event){
 			
 		}
 		}
+} else 
+	{
+        if (m_event.isLeftDown()){
+			change  = mWelcome.isPressed(m_event.getPos());
+		}
+		enum MouseDown{NewUser=3,LogIn=4};
+		switch(change){
+		case NewUser: {
+			mWelcome.new_user=true;
+			mWelcome.createUser();
+			next = true;
+			break;
+					  }
+		case LogIn:{
+			mWelcome.new_user=false;
+			mWelcome.createUser();
+			next = true;
+			break;
+				   }
+		}
+}
 }
 void TutorialApp::settings(Settings * setting){;
 	setting->setWindowSize(1920,1080);
-}
-CINDER_APP_BASIC(TutorialApp, RendererGl);
+};
+CINDER_APP_BASIC(TutorialApp,RendererGl);

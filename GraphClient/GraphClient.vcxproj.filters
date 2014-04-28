@@ -42,6 +42,15 @@
     <ClInclude Include="Welcome.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Texto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="VertexController.cpp">
@@ -63,6 +72,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Welcome.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Texto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

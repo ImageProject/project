@@ -19,9 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NetworkController.h" />
+    <ClInclude Include="User.h" />
     <ClInclude Include="Output.h" />
     <ClInclude Include="OutputController.h" />
     <ClInclude Include="resources2.h" />
+    <ClInclude Include="Texto.h" />
     <ClInclude Include="vLine.h" />
     <ClInclude Include="MiniMap.h" />
     <ClInclude Include="SmallVertex.h" />
@@ -30,6 +33,7 @@
     <ClInclude Include="Welcome.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Texto.cpp" />
     <ClCompile Include="vLine.cpp" />
     <ClCompile Include="MiniMap.cpp" />
     <ClCompile Include="SmallVertex.cpp" />
@@ -100,7 +104,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\libraries\Cinder\lib;$(SolutionDir)\libraries\MongoDB\lib;$(SolutionDir)\libraries\ZeroMQ\lib;$(SolutionDir)\libraries\Boost\lib;$(IncludePath);$(SolutionDir)\libraries\OpenCV\opencv\build\x64\vc11\lib;$(SolutionDir)\libraries\Protobuf\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>cinder_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opencv_calib3d245d.lib;opencv_contrib245d.lib;opencv_core245d.lib;opencv_features2d245d.lib;opencv_flann245d.lib;opencv_gpu245d.lib;opencv_highgui245d.lib;opencv_imgproc245d.lib;opencv_legacy245d.lib;opencv_ml245d.lib;opencv_nonfree245d.lib;opencv_objdetect245d.lib;opencv_photo245d.lib;opencv_stitching245d.lib;opencv_superres245d.lib;opencv_ts245d.lib;opencv_video245d.lib;opencv_videostab245d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cinder_d.lib;kernel32.lib;user32.lib;gdi32.lib;libzmq_d.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opencv_calib3d245d.lib;opencv_contrib245d.lib;opencv_core245d.lib;opencv_features2d245d.lib;opencv_flann245d.lib;opencv_gpu245d.lib;opencv_highgui245d.lib;opencv_imgproc245d.lib;opencv_legacy245d.lib;opencv_ml245d.lib;opencv_nonfree245d.lib;opencv_objdetect245d.lib;opencv_photo245d.lib;opencv_stitching245d.lib;opencv_superres245d.lib;opencv_ts245d.lib;opencv_video245d.lib;opencv_videostab245d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
