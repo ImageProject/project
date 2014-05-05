@@ -77,6 +77,12 @@
     <ClCompile Include="Texto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OutputController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources2.rc">

@@ -96,7 +96,7 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\libraries\Cinder\include;$(SolutionDir)\libraries\MongoDB\include;$(SolutionDir)\libraries\ZeroMQ\include;$(SolutionDir)\libraries\Boost\include;$(IncludePath);$(SolutionDir)\libraries\OpenCV\opencv\build\include\</AdditionalIncludeDirectories>

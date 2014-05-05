@@ -18,7 +18,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UserUser.h">
@@ -28,6 +36,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Grapth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Database.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,60 +2,73 @@
 #include "zmq.hpp"
 #include "zhelpers.hpp"
 #include <fstream>
+#include <cstdio>
 #include <iostream>
-#include "boost/archive/xml_oarchive.hpp"
-#include "boost/archive/xml_iarchive.hpp"
 #include "UserUser.h"
+#include "Database.h"
+
+#pragma comment(lib,"libzmq_d.lib")
 void NetworkController::receive(){
     zmq::context_t context (1);
     zmq::socket_t socket (context, ZMQ_REP);
-    socket.bind ("tcp://*:5556");
-
+	socket.bind ("tcp://*:5555");
     while (true) {
-        zmq::message_t request;
 
         //  Wait for next request from client
-       current =  s_recvf(socket);
-
-		std::cout<<"Yeaa,bitch! I have the user! Time to get money!";
+       /*current =  s_recvf(socket);*/
+		zmq::message_t receiven;
+		std::string current = s_recv(socket);
 		switch(current[0]){
-		case '0':
-			this->logIn();
-			break;
-		case '1':
-			this->newUser();
-			break;
 		case 'G':
-			/*this->*/;
+			{
+				this->receive_grapht_info(current);
+				break;
+			};
+		case 'I':{
+			/*this->receive_photos(&current);*/
+			break;
 		}
-		
+		case '1':
+		{
+			this->newUser(&current);
+			break;
+		}
+		case '0':
+		{
+			this->logIn(&current);
+			break;
+		}
+		}
+// 		int a = socket.recv(&receiven);
+// 		FILE * ndefile = fopen("Receive2.jpg","wb");
+// 		fwrite((void *)receiven.data(),1,777835, ndefile);
+// 		std::cout<<"YEA BITCH";
+// 		fclose(ndefile);
+// 		int ar =9;
+
+		/*	Sleep(0.002);
+		std::string OtherStringToParse =s_recv(socket);
+		std::cout<<OtherStringToParse;
+
+
+
+		std::cout<<"Yeaa,bitch! I have the user! Time to get money!";*/
 			/*	Users newUser = Users();
 			request >> BOOST_SERIALIZATION_NVP(newUser);*/
 #ifndef _WIN32
-        sleep(1);
+        sleep(0.0002);
 #else
-    Sleep (1);
+    Sleep (0.00003);
 #endif
-
-        //  Send reply back to client
-        zmq::message_t reply (5);
-        memcpy ((void *) reply.data (), "I Got IT!", 5);
-        socket.send (reply);
     }
-}
-bool NetworkController::newUser(){
-	return 0;
-}
-bool NetworkController::logIn(){
-	return 0;
-};
-NetworkController::NetworkController(){
-
 }
 
 
 int main(){
 	NetworkController mNetworkController = NetworkController();
 	mNetworkController.receive();
+
+
+
 	return 0;
 }

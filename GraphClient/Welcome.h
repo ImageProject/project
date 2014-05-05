@@ -17,7 +17,7 @@ class Welcome {
 	void draw();
 	void update();
 	bool isClear();
-	void createUser();
+	/*void createUser();*/
 	void set_sizes();
 	bool new_user;
 Welcome();

@@ -47,17 +47,6 @@ void Welcome::update(){
 	gl::draw(login.essence_ptr->render(),login.locate);
 	gl::draw(password.essence_ptr->render(),password.locate);
 };
-void Welcome::createUser(){
-	User newUser = User();
-	newUser.New = true;
-	newUser.login = login.cur_text;
-	newUser.password = password.cur_text;
-	
-
-	NetworkController mNetworkController(newUser);
-
-
-}
 void Welcome::draw(){
 
 	gl::draw(login.essence_ptr->render(),login.locate);
