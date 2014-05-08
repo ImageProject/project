@@ -177,8 +177,6 @@ void TutorialApp::keyDown(KeyEvent k_event){
 	        std::string newstr = mOutputController.inString();
 			mNetworkController.grapth = newstr;
 			if(mNetworkController.send_strings())
-			{
-			}else
 			mNetworkController.send_image();
 		}
 		default: 

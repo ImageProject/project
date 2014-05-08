@@ -4,6 +4,7 @@
 #include "zmq.hpp"
 using namespace std;
 int g=0;
+
 void NetworkController::logIn(std::string* user){
 	std::string login;
 	std::string password;
@@ -41,49 +42,46 @@ void NetworkController::newUser(std::string* user){
 void NetworkController::receive_grapht_info(std::string & grapth){
 	string id;
 	string count;
-	int i=0;
-	for (i=1;grapth[i]!='/';++i)
+	int i=1;
+	for (i;grapth[i]!='/';++i)
 		id =id + grapth[i];
-	for (i=i+2;grapth[i]!='/';++i)
+	i=i+1;
+	for (i;grapth[i]!=' ';++i)
 		count = count +grapth[i];
 	int number = boost::lexical_cast<int>(count);
-	for (int j=0; j<number; ++j)
-		switch(grapth[i+2]){
-		case 'I':
+	i=i+1;
+	std::vector<int> id_photos;
+	for (int j=0; j<number; ++j){
+	
+		
+		switch(grapth[i]){
+		case '0':
 			{
+				int k=i+2;
 				Vertex newVertex;
 				newVertex.type =0;
 				newVertex.adjective_matrix = new bool[number];
 				int f=0;
-				for (int k=i+2;grapth[k]!='/';++k){
+				for (k;grapth[k]!=' ';++k){
 					if (grapth[k]=='0')
 						newVertex.adjective_matrix[f]=0;
 					else
 						newVertex.adjective_matrix[f]=1;
 					++f;
 				}
-				++i;
                 Vertexes.push_back(newVertex);
-				bool newchar[3];
-				for (int i=0; i<3; ++i)
-				newchar[i]=newVertex.adjective_matrix[i];
-				int a= 9;
+				id_photos.push_back(number);
 				break;
 			}
 		case 'N':
 			{
-				Vertex newVertex;
-				newVertex.type =-1;
-				i=i+number+1;
+				
 				break;
 			}
-		case 'F':
+		case '1': case '2':case '3' :case '4':case '5': case '6':
 			{
-				std::string type_str;
-				for (int l=i+2; grapth[l]!='/';++l)
-				   type_str = type_str+grapth[l];
 				Vertex newVertex;
-				newVertex.type =boost::lexical_cast<int>(type_str);
+				newVertex.type =boost::lexical_cast<int>(grapth[i]);
 				newVertex.adjective_matrix = new bool[number];
 				int f=0;
 				for (int k =i+2;grapth[k]!='/';++k){
@@ -93,29 +91,26 @@ void NetworkController::receive_grapht_info(std::string & grapth){
 						newVertex.adjective_matrix[f]=1;
 					++f;
 				}
-				++i;
 				Vertexes.push_back(newVertex);
 				break;
 			}
 
 	}
 
-		
+		i=i+number+3;
+
 }
-void NetworkController::receive_photo(){
-	zmq::context_t context (1);
-	zmq::socket_t socket (context, ZMQ_REP);
-    socket.bind ("tcp://*:5555");
-	zmq::message_t receiven;
-	socket.recv(&receiven);
-	g++;
-	char newChar = boost::lexical_cast<char>(g);
-	std::string imagename = "Image"+newChar;
+	this->receive_photos(number,id,id_photos);
+}
+void NetworkController::receive_photos(int & count,std::string & user_id,std::vector<int> & id_photos){
+	for (vector<int>::iterator p = id_photos.begin();p!=id_photos.end();++p){
+	sockett.recv(&receiven);
+	std::string imagename = "Image_"+user_id+"_" + boost::lexical_cast<char>(*p+1);
 	FILE * ndefile = fopen(imagename.c_str(),"wb");
 	fwrite((void *)receiven.data(),1,777835, ndefile);
 	std::cout<<"YEA BITCH";
 	fclose(ndefile);
-	int ar =9;
+	}
 
 }
 NetworkController::NetworkController(){

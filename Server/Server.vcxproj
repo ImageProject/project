@@ -91,8 +91,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)/libraries/ZeroMQ/lib;$(SolutionDir)/libraries/Boost/lib;C:\Git\project\libraries\MongoDB\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libzmq_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)/libraries/ZeroMQ/lib;$(SolutionDir)/libraries/Boost/lib;$(SolutionDir)/libraries/MongoDB/Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libzmq_d.lib;libmongoclient.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>

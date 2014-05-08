@@ -7,21 +7,23 @@
 #include "UserUser.h"
 #include "Database.h"
 
+zmq::context_t context (1);
+zmq::socket_t sockett (context, ZMQ_REP);
+zmq::message_t receiven;
 #pragma comment(lib,"libzmq_d.lib")
+#pragma comment(lib,"libmongoclient.lib")
 void NetworkController::receive(){
-    zmq::context_t context (1);
-    zmq::socket_t socket (context, ZMQ_REP);
-	socket.bind ("tcp://*:5555");
-    while (true) {
 
+    while (true) {
+		sockett.bind ("tcp://*:5555");
         //  Wait for next request from client
        /*current =  s_recvf(socket);*/
-		zmq::message_t receiven;
-		std::string current = s_recv(socket);
+		std::string current = s_recv(sockett);
 		switch(current[0]){
 		case 'G':
 			{
 				this->receive_grapht_info(current);
+
 				break;
 			};
 		case 'I':{

@@ -1,5 +1,7 @@
 #ifndef NETWORK_CONTROLLER_H
 #define NETWORK_CONTROOLER_H
+#include "zmq_for_WinApi.hpp"
+#include "zhelpers.hpp"
 #include "User.h"
 
 #include <boost/random/random_device.hpp>
@@ -16,11 +18,14 @@ using namespace std;
 class NetworkController{
 	public:
 	NetworkController();
+	void prepare();
 	bool send_image();
 	bool send_strings();
 	void setUser(User *);
-	std::string receive();
+	/*std::string receive();*/
 	int state;
+	zmq::message_t*messagee;
+	zmq::socket_t* requester;
 	string id;
     std::string one;
 	std::string two;
