@@ -7,14 +7,14 @@
 #include "zmq.hpp"
 #include "zhelpers.hpp"
 extern zmq::socket_t sockett;
-extern zmq::message_t receiven;
 class NetworkController{
 public:
-	void newUser(std::string*);
-	void logIn(std::string*);
+	bool newUser(std::string*);
+	bool logIn(std::string*);
 	void receive_photos(int & count,std::string & user_id, std::vector<int> & id_photos);
 	void receive();
-	void receive_grapht_info(std::string&);
+bool  receive_graph_info(std::string &);
+	bool send_request(std::string &request);
 	/*void receive_photos(std::string*);*/
 	NetworkController();
 	std::vector<User> Users;

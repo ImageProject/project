@@ -5,7 +5,7 @@
 using namespace std;
 int g=0;
 
-void NetworkController::logIn(std::string* user){
+bool NetworkController::logIn(std::string* user){
 	std::string login;
 	std::string password;
 	int current =0;
@@ -20,9 +20,9 @@ void NetworkController::logIn(std::string* user){
 	User newUser = User(&login,&password);
 	newUser.New = 0;
 	Users.push_back(newUser);
-
+	return true;
 }
-void NetworkController::newUser(std::string* user){
+bool NetworkController::newUser(std::string* user){
 	std::string login;
 	std::string password;
 	int current =0;
@@ -37,9 +37,10 @@ void NetworkController::newUser(std::string* user){
 	User newUser = User(&login,&password);
 	newUser.New = 1;
 	Users.push_back(newUser);
+	return true;
 
 };
-void NetworkController::receive_grapht_info(std::string & grapth){
+bool NetworkController::receive_graph_info(std::string & grapth){
 	string id;
 	string count;
 	int i=1;
@@ -70,7 +71,7 @@ void NetworkController::receive_grapht_info(std::string & grapth){
 					++f;
 				}
                 Vertexes.push_back(newVertex);
-				id_photos.push_back(number);
+				id_photos.push_back(j);
 				break;
 			}
 		case 'N':
@@ -101,17 +102,35 @@ void NetworkController::receive_grapht_info(std::string & grapth){
 
 }
 	this->receive_photos(number,id,id_photos);
+	return true;
 }
 void NetworkController::receive_photos(int & count,std::string & user_id,std::vector<int> & id_photos){
+	int i=0;
+	std::string bind="tcp://*:510";
 	for (vector<int>::iterator p = id_photos.begin();p!=id_photos.end();++p){
-	sockett.recv(&receiven);
-	std::string imagename = "Image_"+user_id+"_" + boost::lexical_cast<char>(*p+1);
+	zmq::context_t context (1);
+	zmq::message_t file;
+	zmq::socket_t socket_image (context, ZMQ_REP);
+	bind[10]=boost::lexical_cast<char>(i);
+	socket_image.bind (bind.c_str());
+	socket_image.recv(&file);
+	std::string imagename = "Image_"+user_id+"_" + boost::lexical_cast<char>(*p)+".jpg";
 	FILE * ndefile = fopen(imagename.c_str(),"wb");
-	fwrite((void *)receiven.data(),1,777835, ndefile);
+	fwrite((void *)file.data(),1,file.size(), ndefile);
 	std::cout<<"YEA BITCH";
+	int a = ftell(ndefile);
 	fclose(ndefile);
+	++i;
 	}
 
+}
+bool NetworkController::send_request(std::string & request){
+	zmq::context_t context(1);
+	zmq::socket_t requester(context, ZMQ_REQ);
+	std::string str;
+	requester.connect("tcp://localhost:5556");
+	s_send(requester,request);
+	return true;
 }
 NetworkController::NetworkController(){
 

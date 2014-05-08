@@ -6,39 +6,56 @@
 #include <iostream>
 #include "UserUser.h"
 #include "Database.h"
-
 zmq::context_t context (1);
 zmq::socket_t sockett (context, ZMQ_REP);
-zmq::message_t receiven;
 #pragma comment(lib,"libzmq_d.lib")
 #pragma comment(lib,"libmongoclient.lib")
+bool status =0;
+std::string okay = "Ok";
+std::string fail = "!";
 void NetworkController::receive(){
-
-    while (true) {
+	
+	
+    while (true) {  
+		zmq::context_t context (1);
+		zmq::socket_t sockett (context, ZMQ_REP);
 		sockett.bind ("tcp://*:5555");
-        //  Wait for next request from client
-       /*current =  s_recvf(socket);*/
 		std::string current = s_recv(sockett);
+
 		switch(current[0]){
 		case 'G':
 			{
-				this->receive_grapht_info(current);
+				if(this->receive_graph_info(current)){
 
+					std::cout<<"Grapth is!";
+				}
+				else 
+				this->send_request(fail);
 				break;
 			};
-		case 'I':{
-			/*this->receive_photos(&current);*/
-			break;
-		}
+		//case 'I':{
+		//	/*this->receive_photos(&current);*/
+		//	break;
+		/*}*/
 		case '1':
 		{
-			this->newUser(&current);
+			if(this->newUser(&current)){
+				this->send_request(okay);
+				std::cout<<"New user is!";
+			}
+			else 
+			    this->send_request(fail);
+
 			break;
 		}
 		case '0':
 		{
-			this->logIn(&current);
-			break;
+			if(this->logIn(&current)){
+				this->send_request(okay);
+			std::cout<<"log in is!";
+			}
+			else 
+			this->send_request(fail);
 		}
 		}
 // 		int a = socket.recv(&receiven);

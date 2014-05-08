@@ -26,7 +26,7 @@
 using namespace ci;
 using namespace ci::app;
 std::vector<boost::filesystem::path> paths;
-bool next_form = 1;
+bool next_form = 0;
 
 class TutorialApp: public AppBasic{
 	void setup();
@@ -55,8 +55,7 @@ void TutorialApp::setup(){
 	mVertexController.mMiniMap.position=1;
 	mVertexController.mMiniMap.resolution=Vec2i(1920,1080);
 	mVertexController.mMiniMap.getCenter();
-	mVertexController.updateSpeed=3;
-	gl::lineWidth(2.5f);
+	mVertexController.updateSpeed=20;
 	stop = false;
 	changeVertex = false;
 change = 0;
@@ -254,7 +253,6 @@ void TutorialApp::mouseDown(MouseEvent m_event){
 			downs=0;
 		}
 		if (size_t number = mVertexController.isTextBox(m_event.getPos())){
-			mVertexController.Vertexes[number].vColor=Color(1,0.6,34);
 			changeVertex = number+1;
 			
 		}

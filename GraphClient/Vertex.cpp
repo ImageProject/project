@@ -38,7 +38,9 @@ Vertex::Vertex(const Vec2i &position){
 	vColor = Color(Rand::randInt(1),Rand::randInt(111),Rand::randInt(163));
 	name.setBackgroundColor(vColor);
 	name.setColor(ci::Color::black());
-	vRadius = Rand::randInt(23);
+	vRadius = 32;
+	name.setAlignment(ci::TextBox::CENTER);
+	name.setFont(ci::Font("Times New Roman",vRadius));
 	name.setSize(Vec2i(vRadius*2/sqrtf(2),vRadius*2/sqrtf(2)));
 	vLoc = position;
 	vBounds[0]=Vec2i(vLoc.x-vRadius,vLoc.y-vRadius);
@@ -68,7 +70,7 @@ newName = newName +prefix;
 name.setText(newName);
 gl::color(vColor);
 gl::drawSolidCircle( vLoc, vRadius );
-gl::draw(name.render(),vLoc);
+gl::draw(name.render(),vLoc-name.getSize()/2);
 	} else {
 	gl::color(vColor);
 	gl::drawSolidCircle( vLoc, vRadius );

@@ -7,6 +7,7 @@ vLine::vLine(){
 
 }
 void vLine::draw(){
+	gl::lineWidth(2.5f);
 	gl::color(Color(255,0,0));
 	gl::drawLine(start,finish);
 }

@@ -13,9 +13,10 @@ void MiniMap::push_vertex(const Vertex & Image){
 	objects.push_back(MapObject);
 }
 void MiniMap::push_line(const vLine & Image){
+	gl::lineWidth(0.5f);
 	vLine MapLine = vLine();
-	MapLine.start = Vec2i(center+(Image.start-resolution/2));
-	MapLine.finish =Vec2i(center+(Image.finish-resolution/2));
+	MapLine.start = Vec2i(center+(Image.start-resolution/2)/scale);
+	MapLine.finish =Vec2i(center+(Image.finish-resolution/2)/scale);
 	lines.push_back(MapLine);
 }
 

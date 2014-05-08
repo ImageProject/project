@@ -22,10 +22,8 @@ class NetworkController{
 	bool send_image();
 	bool send_strings();
 	void setUser(User *);
-	/*std::string receive();*/
+	std::string receive();
 	int state;
-	zmq::message_t*messagee;
-	zmq::socket_t* requester;
 	string id;
     std::string one;
 	std::string two;
