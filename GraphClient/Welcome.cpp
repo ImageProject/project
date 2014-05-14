@@ -35,7 +35,7 @@ bool Welcome::isClear(){
 	return false;
 }
 void Welcome::set_sizes(){
-	hi.essence_ptr->setSize(Vec2i(200,200));
+	hi.essence_ptr->setSize(Vec2i(200,200)); //Задаем размеры 
 	end_and_logIn.essence_ptr->setSize(Vec2i(60,60));
 	newUser.essence_ptr->setSize(Vec2i(60,60));
 

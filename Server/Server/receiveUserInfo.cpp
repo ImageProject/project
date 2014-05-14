@@ -7,17 +7,17 @@ int main{
     while (true) {
         zmq::message_t request;
 
-        //  Wait for next request from client
+        //  ќжидание следующего запроса от клиента
         socket.recv (&request);
 
-        //  Do some 'work'
+        //  Ќ≈ представл€ю как люди пишут документацию
 #ifndef _WIN32
         sleep(1);
 #else
     Sleep (1);
 #endif
 
-        //  Send reply back to client
+        //  ќтслыем ответ обратно пользователю
         zmq::message_t reply (5);
         memcpy ((void *) reply.data (), "Im Got IT!", 5);
         socket.send (reply);
