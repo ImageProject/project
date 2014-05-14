@@ -7,9 +7,9 @@ vLine::vLine(){
 
 }
 void vLine::draw(){
-	gl::lineWidth(2.5f);
-	gl::color(Color(255,0,0));
-	gl::drawLine(start,finish);
+	gl::lineWidth(2.5f);         // Задаем толщину для линии
+	gl::color(Color(255,0,0));   // Задаем цвет для линии
+	gl::drawLine(start,finish); // Задаем координаты  для линии
 }
 void vLine::update(const int & speed, const int & direction){
 	switch(direction){

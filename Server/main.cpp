@@ -13,10 +13,10 @@ zmq::socket_t sockett (context, ZMQ_REP);
 bool status =0;
 std::string okay = "Ok";
 std::string fail = "!";
-void NetworkController::receive(){
+void NetworkController::receive(){  // Реализуем фунции получения из  NetworkController.h
 	
 	
-    while (true) {  
+    while (true) {                                       //Начинаем цикл
 		zmq::context_t context (1);
 		zmq::socket_t sockett (context, ZMQ_REP);
 		sockett.bind ("tcp://*:5555");
@@ -27,7 +27,7 @@ void NetworkController::receive(){
 			{
 				if(this->receive_graph_info(current)){
 
-					std::cout<<"Grapth is!";
+					std::cout<<"Grapth is!"; // вывели на экран Grapth is!
 				}
 				else 
 				this->send_request(fail);

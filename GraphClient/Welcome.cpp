@@ -1,4 +1,4 @@
-#include "Welcome.h"
+#include "Welcome.h"                          // Этот спипишник отвечает заа логин и пароль
 #include "Texto.h"
 #include "cinder\ImageIo.h"
 #include "cinder\app\AppBasic.h"

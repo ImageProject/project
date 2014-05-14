@@ -59,7 +59,7 @@ bool NetworkController::send_image(){
 		fseek( pFile, 0, SEEK_END );
 		int Size = ftell( pFile );
 		rewind(pFile);                         // КАЖДАЯ СТРОЧКА ВЫСТРАДАНА"!!!!!!!!
-		zmq::message_t messagee(Size);
+		zmq::message_t messagee(Size);         // Думаю, на этом моменте Сережа был не в себе 
 		fread((void*)messagee.data(),1,Size,pFile);
 		requester.send(messagee);         
 		fclose(pFile);

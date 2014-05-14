@@ -35,7 +35,7 @@ for (int i=0; i<6;++i){
 };
 Vertex::Vertex(const Vec2i &position){
 	name.setText(" ");
-	vColor = Color(Rand::randInt(1),Rand::randInt(111),Rand::randInt(163));
+	vColor = Color(Rand::randInt(1),Rand::randInt(111),Rand::randInt(163)); // Задаем рандомные цвета
 	name.setBackgroundColor(vColor);
 	name.setColor(ci::Color::black());
 	vRadius = 32;
@@ -55,9 +55,9 @@ for (int i=0; i<50;++i){
 
 
 for (int i=0; i<6;++i){
-	smallVertex newsmallVertex = smallVertex(vLoc,vRadius,i);
-	smallVertexs.push_back(newsmallVertex);
-   }
+	smallVertex newsmallVertex = smallVertex(vLoc,vRadius,i); // В этом цикле запалняем вектор 
+	smallVertexs.push_back(newsmallVertex);                  // В котором будут храниться точки
+   }                                                         // Для соединения вершин графа 
 name.setColor(Color(255,0,0));
 };
 void Vertex::draw(){
