@@ -5,10 +5,10 @@
 using namespace std;
 int g=0;
 
-bool NetworkController::logIn(std::string* user){
-	std::string login;
-	std::string password;
-	int current =0;
+bool NetworkController::logIn(std::string* user){ //Реализация функции  NetworkController 
+	std::string login;                            //Вход пользователя 
+	std::string password;                         // 2 Переменных строкового типа
+	int current =0;                                // Устанавливаем текущее значение 0
     for (int i=2;(*user)[i]!='/';++i){
 		login = login + (*user)[i];
 		current =i;
@@ -17,9 +17,9 @@ bool NetworkController::logIn(std::string* user){
 	for (current; (*user)[current]!='/';++current){
 	    password = password + (*user)[current];
 	}
-	User newUser = User(&login,&password);
-	newUser.New = 0;
-	Users.push_back(newUser);
+	User newUser = User(&login,&password);                        //Заносим данные нового пользователя
+	newUser.New = 0;                                             // В базу данных
+	Users.push_back(newUser);                                    // Заполняем массив пользователей
 	return true;
 }
 bool NetworkController::newUser(std::string* user){
@@ -40,7 +40,8 @@ bool NetworkController::newUser(std::string* user){
 	return true;
 
 };
-bool NetworkController::receive_graph_info(std::string & grapth){
+bool NetworkController::receive_graph_info(std::string & grapth){ //Реализация функции  NetworkController 
+	                                                              //Получения информации о графе от клиента 
 	string id;
 	string count;
 	int i=1;
@@ -104,8 +105,8 @@ bool NetworkController::receive_graph_info(std::string & grapth){
 	this->receive_photos(number,id,id_photos);
 	return true;
 }
-void NetworkController::receive_photos(int & count,std::string & user_id,std::vector<int> & id_photos){
-	int i=0;
+void NetworkController::receive_photos(int & count,std::string & user_id,std::vector<int> & id_photos){ //Реализация функции  NetworkController 
+	int i=0;                                                                                           // Получения изображений от клиента 
 	std::string bind="tcp://*:510";
 	for (vector<int>::iterator p = id_photos.begin();p!=id_photos.end();++p){
 	zmq::context_t context (1);
@@ -113,7 +114,7 @@ void NetworkController::receive_photos(int & count,std::string & user_id,std::ve
 	zmq::socket_t socket_image (context, ZMQ_REP);
 	bind[10]=boost::lexical_cast<char>(i);
 	socket_image.bind (bind.c_str());
-	socket_image.recv(&file);
+	socket_image.recv(&file);//Реализация функции  NetworkController 
 	std::string imagename = "Image_"+user_id+"_" + boost::lexical_cast<char>(*p)+".jpg";
 	FILE * ndefile = fopen(imagename.c_str(),"wb");
 	fwrite((void *)file.data(),1,file.size(), ndefile);
@@ -124,7 +125,7 @@ void NetworkController::receive_photos(int & count,std::string & user_id,std::ve
 	}
 
 }
-bool NetworkController::send_request(std::string & request){
+bool NetworkController::send_request(std::string & request){ // 
 	zmq::context_t context(1);
 	zmq::socket_t requester(context, ZMQ_REQ);
 	std::string str;

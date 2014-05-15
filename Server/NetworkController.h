@@ -14,8 +14,8 @@ public:
 	void receive_photos(int & count,std::string & user_id, std::vector<int> & id_photos);  // фунцкия возвращающая 
 	void receive(); // фунцкия возвращающая
 bool  receive_graph_info(std::string &);  
-	bool send_request(std::string &request);
-	/*void receive_photos(std::string*);*/
+	bool send_request(std::string &request); /*void receive_photos(std::string*);*/
+	
 	NetworkController();
 	std::vector<User> Users; // Запиливаем вектор 
 	std::vector<Vertex> Vertexes;
