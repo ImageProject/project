@@ -3,7 +3,7 @@
 #include "Vertex.h"
 #include "cinder\Text.h"
 #include "cinder\app\AppBasic.h"
-class Texto{
+class Texto{ //создание класса текстбокс для его дальнейшего использования
 	public:
 	ci::TextBox * essence_ptr;
 	~Texto();
