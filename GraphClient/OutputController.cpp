@@ -1,8 +1,9 @@
+//файл-контролер того, что выводится
 #include "OutputController.h"
 #include <boost/lexical_cast.hpp>
 std::string OutputController::inString(){
 	std::string result;
-	char splitter = '/';
+	char splitter = '/'; //создание переменной-разделителя
 
 	for (std::vector<Output>::iterator p= vertexes.begin(); p!=vertexes.end();++p){
 		std::string current;

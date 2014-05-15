@@ -1,3 +1,4 @@
+//файл-контроллер графа
 #include "cinder/app/AppBasic.h"
 #include "cinder/Timeline.h"
 #include "cinder/Rand.h"
@@ -13,9 +14,9 @@ VertexController::VertexController()
 
 };
 void VertexController::addVertexes(const Vec2f & position){
-Vertex mVertex=Vertex(position);
-mMiniMap.push_vertex(mVertex);
-Vertexes.push_back(mVertex);
+Vertex mVertex=Vertex(position); //определение позиций мини вершин
+mMiniMap.push_vertex(mVertex); //заполнение вектора вершин графа на мини карте
+Vertexes.push_back(mVertex); //заполнение вектора вершин графа
 			};
 void VertexController::update(const int & speed,const int & direction){
 	for (vector<Vertex>::iterator p =Vertexes.begin();p!=Vertexes.end();++p)
@@ -26,7 +27,7 @@ void VertexController::update(const int & speed,const int & direction){
 		t->update(speed,direction);
 	}
 };
-void VertexController::draw(){
+void VertexController::draw(){ //класс рисования вершин
 	for (vector<Vertex>::iterator p =Vertexes.begin();p!=Vertexes.end();++p)
 	{
 		p->draw();
@@ -36,7 +37,7 @@ void VertexController::draw(){
 	}
 	mMiniMap.draw();
 };
-Vec4i VertexController::isConnect(const Vec2i & location){
+Vec4i VertexController::isConnect(const Vec2i & location){ //класс соединения вершин графов и проверка на то, внужно ли месте кликнули
 	for (vector<Vertex>::iterator p=Vertexes.begin(); p!=Vertexes.end();++p)
 		for (vector<smallVertex>::iterator s= p->smallVertexs.begin();s!=p->smallVertexs.end();++s){
 			short current_y =  location.y-s->smLoc.y;
