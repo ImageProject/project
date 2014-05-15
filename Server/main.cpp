@@ -26,7 +26,7 @@ void NetworkController::receive(){  // Реализуем фунции получения из  NetworkCon
 		std::string current = s_recv(sockett);
 
 		switch(current[0]){
-		case 'G':
+		case 'G':                 // Случай  'G'
 			{
 				if(this->receive_graph_info(current)){       
 
