@@ -2,9 +2,9 @@
 #include "MiniMap.h"
 using namespace std;
 MiniMap::MiniMap(){
-	position=1;
+	position=1; //определение местонахождения миникарты
 	scale=10;
-	resolution=Vec2i(1920,1080);
+	resolution=Vec2i(1920,1080); //заполнение какого-то вектора
 };
 void MiniMap::push_vertex(const Vertex & Image){
 	Vertex MapObject = Vertex(center+(Image.vLoc - resolution/2)/scale, Image.vRadius,scale);
