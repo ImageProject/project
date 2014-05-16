@@ -28,17 +28,17 @@ bool NetworkController::send_strings(){
 			requester.connect("tcp://localhost:5555"); //и вторая попытка соединения
 		} else{ fail=true; }                                                                            //////////////////////////
 	}
-	if (!grapth.size()){
+	if (!grapth.size()){ //проверка на размер графа
 	char temp = '/';
 	char buffer[2];
 	char * temp_state = itoa(New,buffer,10);
-	string newresult;
-    newresult =newresult+*temp_state+temp+one+temp+two+temp;
-	s_send(requester,newresult);
-	if (this->receive()[0]=='O')
+	string newresult; //создание строки для записи нового результата
+    newresult =newresult+*temp_state+temp+one+temp+two+temp; //нахождение новго результата
+	s_send(requester,newresult); //отправление на сервер результата
+	if (this->receive()[0]=='O') //если получен 0, то всё верно
 	return true;                  
 	}
-	else {
+	else { //если получен не 0, то выполняется ещё раз
 	grapth = 'G'+id+"/"+grapth;
 	s_send(requester,grapth);
 	}
@@ -49,22 +49,22 @@ bool NetworkController::send_strings(){
 
 bool NetworkController::send_image(){ //класс отправки изображения на сервер
 	std::string connect="tcp://localhost:510"; //соединение с сервером
-	for (int i=0;i<paths.size();++i){
+	for (int i=0;i<paths.size();++i){ //проверка размера изображение
 		zmq::context_t context(1);
 		zmq::socket_t requester(context, ZMQ_REQ);
-		connect[18] =boost::lexical_cast<char>(i);
+		connect[18] =boost::lexical_cast<char>(i); //соединение
 		int a=5;
 		requester.connect(connect.c_str());
-		FILE * pFile = fopen(paths[i].string().c_str(),"rb");
+		FILE * pFile = fopen(paths[i].string().c_str(),"rb"); //открытие файла
 		if (pFile!=NULL){
 		fseek( pFile, 0, SEEK_END );
-		int Size = ftell( pFile );
+		int Size = ftell( pFile ); //размер файла
 		rewind(pFile);                         //  ¿∆ƒ¿ﬂ —“–Œ◊ ¿ ¬€—“–¿ƒ¿Õ¿"!!!!!!!!
 		zmq::message_t messagee(Size);         // ƒÛÏ‡˛, Ì‡ ˝ÚÓÏ ÏÓÏÂÌÚÂ —ÂÂÊ‡ ·˚Î ÌÂ ‚ ÒÂ·Â 
-		fread((void*)messagee.data(),1,Size,pFile);
-		requester.send(messagee);         
-		fclose(pFile);
-		Sleep(0.5);
+		fread((void*)messagee.data(),1,Size,pFile); //чтение файлра
+		requester.send(messagee);         //отправление изображени
+		fclose(pFile); //закрытие файла
+		Sleep(0.5); //отдых
 
 		}
 	}
@@ -74,7 +74,7 @@ bool NetworkController::send_image(){ //класс отправки изобра
 NetworkController::NetworkController(){
 	New=false;
 	state = 0;
-	this->prepare();
+	this->prepare(); //подготовка
 }
 void NetworkController::setUser(User * newUser){ //класс создания нового пользоателя на сервере
 	this->one = newUser->login; //запоминание логина
@@ -82,19 +82,19 @@ void NetworkController::setUser(User * newUser){ //класс создания �
 	this->New = newUser->New; //сохранение новог пользователя
 	
 }
-bool NetworkController::receive_result(){
+bool NetworkController::receive_result(){ //класс получения результата
 	zmq::context_t context (1);
 	zmq::socket_t socket (context, ZMQ_REP);
-	socket.bind ("tcp://*:5555");
-		zmq::message_t receiven;
+	socket.bind ("tcp://*:5555"); //запрос на сервер
+		zmq::message_t receiven; //запись полученного изображения
 		int a = socket.recv(&receiven);
 		FILE * ndefile = fopen("Receive.jpg","wb"); //открытие полученного файл
 		fwrite((void *)receiven.data(),1,777835, ndefile); //обработка одним из фильтров
 		std::cout<<"YEA BITCH"; //вывод сообщения об удачной обработке
-		fclose(ndefile);
+		fclose(ndefile);//закрытие файла
 		return true;
 }
-void NetworkController::prepare(){
+void NetworkController::prepare(){ //подготовка
 //zmq::context_t context(1);
 //zmq::socket_t ptr_requester(context, ZMQ_REQ);
 //requester = &ptr_requester;

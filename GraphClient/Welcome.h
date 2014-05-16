@@ -14,12 +14,12 @@ class Welcome { //создание кнопок и квадратиков для
 	Texto hi; //привествие
 	Texto end_and_logIn; //вход
 	void Setup(ci::Vec2i &,ci::Vec2i &,ci::Vec2i &,ci::Vec2i &,ci::Vec2i &,std::string &,std::string &, std::string &); //заполнение векторов
-	void draw();
-	void update();
-	bool isClear();
+	void draw(); //рисование
+	void update(); //обновление
+	bool isClear(); //очистка
 	/*void createUser();*/
-	void set_sizes();
-	bool new_user;
+	void set_sizes(); //задание размеров
+	bool new_user; //новый пользователь
 Welcome();
 	ci::gl::Texture button;
 	void setNewButton(const std::string &);

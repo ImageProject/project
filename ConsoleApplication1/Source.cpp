@@ -28,38 +28,38 @@ const std::string currentDateTime() {
 
 
 int main(void)
-{
+{ //решение того, кто ты: клиент, сервер или никто
 program_start:
 
 cout << "Who are you?\n [1] - Server\n [2] - Client\n [q] - Exit" << endl;
 
-char decision = getch();
+char decision = getch(); //выбираешь нужный вариант
 MODE mode;
 
-if(decision == '1'){
+if(decision == '1'){ //если нажал 1, то перенправление на сервер
 mode = SERVER;
-}else if(decision == '2'){
+}else if(decision == '2'){ //если 2, то на клиент
 mode = CLIENT;
-}else if(decision == 'q'){
+}else if(decision == 'q'){ //если q, то выход пока-пока
 return 0;
 }else{
-// Mfckr
-cout << "Try again" << endl;
-goto program_start;
+// После нажатия какой-либо другой кнопки вывод сообщения
+cout << "Try again" << endl; //"Попробуйте снова"
+goto program_start; //начало программа
 }
 
 
-zmq::context_t context(1);
+zmq::context_t context(1); //создание сокетов
 zmq::socket_t *socket;
 
 
-if(mode == SERVER){
-// Prepare our context and socket
+if(mode == SERVER){ //подготовка серера
+
 socket = new zmq::socket_t(context, ZMQ_REP);	
 socket->bind ("tcp://*:5555");
 cout << "Server started. Waiting for client." << endl;	
 
-// Handshaking with client
+//Клиент
 message_t helloFromClient;
 socket->recv(&helloFromClient);	
 string helloFromClientString((char *)helloFromClient.data());
