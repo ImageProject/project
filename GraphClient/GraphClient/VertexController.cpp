@@ -12,28 +12,29 @@ VertexController::VertexController()
 	
 
 };
-void VertexController::addVertexes(const Vec2f & position){
+void VertexController::addVertexes(const Vec2f & position){ //функция добавление вершин
 Vertex mVertex=Vertex(position);
 mMiniMap.push_vertex(mVertex);
 Vertexes.push_back(mVertex);
 			};
-void VertexController::update(){
+void VertexController::update(){ //обновление
 	for (vector<Vertex>::iterator p =Vertexes.begin();p!=Vertexes.end();++p)
 	{
 		p->update();
 	}
 };
-void VertexController::draw(){
-	for (vector<Vertex>::iterator p =Vertexes.begin();p!=Vertexes.end();++p)
+void VertexController::draw(){ //рисование
+	for (vector<Vertex>::iterator p =Vertexes.begin();p!=Vertexes.end();++p) //начало
 	{
 		p->draw();
 	}
-	for (vector<Line>::iterator line =lines.begin();line!=lines.end();++line){
+	for (vector<Line>::iterator line =lines.begin();line!=lines.end();++line) //конец
+    {
 		line->draw();
 	}
-	mMiniMap.draw();
+	mMiniMap.draw(); //рисование миникарты
 };
-Vec4i VertexController::isConnect(const Vec2i & location){
+Vec4i VertexController::isConnect(const Vec2i & location){ //проверка на соединение маленьких вершин
 	for (vector<Vertex>::iterator p=Vertexes.begin(); p!=Vertexes.end();++p)
 		for (vector<smallVertex>::iterator s= p->smallVertexs.begin();s!=p->smallVertexs.end();++s){
 			short current_y =  location.y-s->newLoc.y;
