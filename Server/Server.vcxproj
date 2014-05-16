@@ -155,6 +155,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Framing line.h" />
     <ClInclude Include="Grapth.h" />
     <ClInclude Include="Database.h" />
     <ClInclude Include="Vertex.h" />
