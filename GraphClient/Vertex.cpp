@@ -1,3 +1,4 @@
+//файл для рисования больших вершин
 #include "Vertex.h"
 #include "smallVertex.h"
 #include "cinder/Rand.h"
@@ -16,17 +17,17 @@
 using namespace ci;
 Vertex::Vertex(const Vec2i &position, const int & mainRadius,const int & scale){
 	vColor = Color(Rand::randInt(1),Rand::randInt(111),Rand::randInt(163));
-	vRadius = mainRadius/scale;
-	name.setSize(Vec2i(vRadius*2/sqrtf(2),vRadius*2/sqrtf(2)));
-	vLoc = position;
-	name.setBackgroundColor(vColor);
-	name.setColor(ci::Color::black());
+	vRadius = mainRadius/scale; //радиус
+	name.setSize(Vec2i(vRadius*2/sqrtf(2),vRadius*2/sqrtf(2))); //размер
+	vLoc = position; //позиция
+	name.setBackgroundColor(vColor); //задний цвет
+	name.setColor(ci::Color::black()); //цвета вершины
 	type = -1;
 	for (int i=0; i<50;++i){
 		connections[i]=false;
 	}
 
-	isImage = false;
+	isImage = false; //загрузка картинок
 
 for (int i=0; i<6;++i){
 	smallVertex newsmallVertex = smallVertex(vLoc,vRadius,i);
@@ -35,13 +36,13 @@ for (int i=0; i<6;++i){
 };
 Vertex::Vertex(const Vec2i &position){
 	name.setText(" ");
-	vColor = Color(Rand::randInt(1),Rand::randInt(111),Rand::randInt(163)); // ������ ��������� �����
+	vColor = Color(Rand::randInt(1),Rand::randInt(111),Rand::randInt(163)); // «‡‰‡ÂÏ ‡Ì‰ÓÏÌ˚Â ˆ‚ÂÚ‡
 	name.setBackgroundColor(vColor);
 	name.setColor(ci::Color::black());
 	vRadius = 32;
 	name.setAlignment(ci::TextBox::CENTER);
-	name.setFont(ci::Font("Times New Roman",vRadius));
-	name.setSize(Vec2i(vRadius*2/sqrtf(2),vRadius*2/sqrtf(2)));
+	name.setFont(ci::Font("Times New Roman",vRadius)); //установка шрифта для текста
+	name.setSize(Vec2i(vRadius*2/sqrtf(2),vRadius*2/sqrtf(2))); //размер
 	vLoc = position;
 	vBounds[0]=Vec2i(vLoc.x-vRadius,vLoc.y-vRadius);
 vBounds[1]=Vec2i(vLoc.x+vRadius,vLoc.y-vRadius);
@@ -55,9 +56,9 @@ for (int i=0; i<50;++i){
 
 
 for (int i=0; i<6;++i){
-	smallVertex newsmallVertex = smallVertex(vLoc,vRadius,i); // � ���� ����� ��������� ������ 
-	smallVertexs.push_back(newsmallVertex);                  // � ������� ����� ��������� �����
-   }                                                         // ��� ���������� ������ ����� 
+	smallVertex newsmallVertex = smallVertex(vLoc,vRadius,i); // ¬ ˝ÚÓÏ ˆËÍÎÂ Á‡Ô‡ÎÌˇÂÏ ‚ÂÍÚÓ 
+	smallVertexs.push_back(newsmallVertex);                  // ¬ ÍÓÚÓÓÏ ·Û‰ÛÚ ı‡ÌËÚ¸Òˇ ÚÓ˜ÍË
+   }                                                         // ƒÎˇ ÒÓÂ‰ËÌÂÌËˇ ‚Â¯ËÌ „‡Ù‡ 
 name.setColor(Color(255,0,0));
 };
 void Vertex::draw(){
@@ -68,8 +69,8 @@ std::string newName = boost::lexical_cast<std::string>(type);
 char prefix = 'F';
 newName = newName +prefix;
 name.setText(newName);
-gl::color(vColor);
-gl::drawSolidCircle( vLoc, vRadius );
+gl::color(vColor); //цвет
+gl::drawSolidCircle( vLoc, vRadius ); //рисование
 gl::draw(name.render(),vLoc-name.getSize()/2);
 	} else {
 	gl::color(vColor);
