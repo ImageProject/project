@@ -1,0 +1,176 @@
+#include <iostream>
+#include <fstream>
+#include <list>
+#include <map>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <math.h>
+using namespace std;
+
+struct lang {
+	lang(char ch[3]) {
+		val[0] = ch[0];
+		val[1] = ch[1];
+		val[2] = 0;
+	}
+	lang() { val[2] = 0; }
+	char val[3];
+	bool operator == (const lang& l) const {
+		return (val[0] == l.val[0] && val[1] == l.val[1]);
+	}
+	bool operator != (const lang& l) const {
+		return !(*this == l);
+	}
+	bool operator < (const lang& l) const {
+		if (val[0] != l.val[0]) {
+			return val[0] < l.val[0];
+		}
+		return val[1] < l.val[1];
+	}
+	bool operator > (const lang& l) const {
+		if (val[0] != l.val[0]) {
+			return val[0] > l.val[0];
+		}
+		return val[1] > l.val[1];
+	}
+};
+
+char easytolower(char in){
+	if(in <= 'Z' && in >= 'A')
+		return in - ('Z'-'z');
+	return in;
+}
+char* easytoupper(char in[3]) {
+	in[0] += ('A'-'a');
+	in[1] += ('A'-'a');
+	return in;
+}
+
+template <class T>
+int sum(const T& w) {
+	int res = 0;
+	for (auto it = begin(w); it != end(w); ++it) {
+		res += it->second;
+	}
+	return res;
+}
+template <class T>
+int _min(const T& w) {
+	int min = begin(w)->second;
+	for (auto it = begin(w); it != end(w); ++it) {
+		if (it->second < min) {
+			min = it->second;
+		}
+	}
+	return min;
+}
+
+int main() {
+
+	map<string, map<lang, int>> wlist; // слово, языки, в которых оно встречалось, сколько раз встречалось
+	map<lang, int> lang_counts;	// сколько раз встречался этот язык
+	int word_count = 0; // сколько всего было слов
+	map<lang, int> lang_word_counts; // сколько слов данного языка было
+
+	const char delims[] = " ,.\n\t1234567890-=_`:></|\\*()$%+;#!@^&?\"{}[]\'\\";
+	cout << "TRAIN" << endl;
+
+	ifstream train_f("lang_task\\train.txt");
+	if (train_f.is_open() == false) {
+		cout << "Can't open the train set" << endl;
+		system("pause");
+		return 0;
+	}
+
+	char buf[4096];
+
+	const float z = 0.1; // коэффициент регуляризации
+
+	for (int i = 0; i < 75000; ++i) {
+
+		train_f.getline(buf, 4096);
+		std::transform(begin(buf), end(buf), begin(buf), easytolower);
+
+		char* words = strtok(buf, delims);
+		lang temp;
+		strcpy(temp.val, words);
+		++lang_counts[temp];
+		words = strtok(0, delims);
+
+		while (words) {
+			++word_count;
+			++wlist[words][temp];
+			++lang_word_counts[temp];
+			words = strtok(0, delims);
+		}
+	}
+
+	train_f.close();
+
+	map<lang, std::pair<double, bool>> probs;
+
+	ifstream test_f("lang_task\\test.txt");
+	if (test_f.is_open() == false) {
+		cout << "Can't open the train set" << endl;
+		system("pause");
+		return 0;
+	}
+
+	ofstream output_f("lang_task\\output.txt");
+
+	cout << "\nTEST" << endl;
+
+	for (int i = 0; i < 15000; ++i) {
+
+		test_f.getline(buf, 4096);
+		std::transform(begin(buf), end(buf), begin(buf), easytolower);
+		char* words = strtok(buf, delims);
+		lang max_lang;
+
+		for (auto it = lang_counts.begin(); it != lang_counts.end(); ++it) {
+			probs[it->first].first = log(double(it->second) / 75000);
+			probs[it->first].second = false;
+		}
+
+		while (words) {
+			auto it = wlist.find(words);
+			if (it != wlist.end()) {
+				for (auto jt = it->second.begin(); jt != it->second.end(); ++jt) {
+					probs[jt->first].first += log(z + double(wlist[words][jt->first])) 
+						- log(lang_word_counts[jt->first] + z*double(sum(wlist[words])));
+					probs[jt->first].second = true;
+				}
+				for (auto jt = lang_counts.begin(); jt != lang_counts.end(); ++jt) {
+					if (it->second.find(jt->first) == it->second.end()) {
+						probs[jt->first].first += log(z)
+							- log(lang_word_counts[jt->first] + z*double(sum(wlist[words])));
+					}
+				}
+			}
+			words = strtok(0, delims);
+		}
+
+		double max = 0;
+		for (auto it = probs.begin(); it != probs.end(); ++it) {
+			if (it->second.second) {
+				if (!max || it->second.first > max) {
+					max = it->second.first;
+					max_lang = it->first;
+				}
+			}
+		}
+
+		if (!max) {
+			max_lang = lang("EN"); // если не встречено ни одного знакомого слова, то пусть будет англ.
+		}
+
+		output_f << easytoupper(max_lang.val) << endl;
+	}
+	
+	test_f.close();
+	output_f.close();
+
+	system("pause");
+	return 0;
+}
